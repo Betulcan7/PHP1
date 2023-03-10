@@ -25,4 +25,20 @@ function ConnectDb(){
       var_dump($result);
     }
 
+
+    function CrudBieren(){    
+
+      // Haal alle bier record uit de tabel    
+      $result = GetData("bier");      
+      
+      //print table   
+      PrintCrudBier($result);   
+      //PrintTableTest($result);   
+  
+  }
+  
+  function PrintCrudBieren(){
+  
+  }
+
 ?>
