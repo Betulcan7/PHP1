@@ -1,8 +1,8 @@
 <h1>Opdracht 6 hoofdstuk 9: gastenboek</h1>
 <form method="post">
-    Naam: <input type="text" name="naam" id="naam"></input></br></br>
-    Bericht: <textarea type="text" name="bericht" id="bericht"></textarea></br></br>
-    <input type="submit" name="knop" id="knop">
+    Naam: <input type="text" name="naam" code="naam"></input></br></br>
+    Bericht: <textarea type="text" name="bericht" code="bericht"></textarea></br></br>
+    <input type="submit" name="knop" code="knop">
 </form>
 
 
@@ -34,12 +34,12 @@ try {
     $data = $conn->query($sqlSelect);
 
     foreach ($data as $row) {
-        echo $row['id']." ";
+        echo $row['code']." ";
         echo $row['datumtijd']." ";
         echo $row['naam']." ";
         echo $row['bericht']." ";
 
-        echo "<a href='VerwijderBericht.php?id=$row[id]'>Verwijderen</a>";
+        echo "<a href='VerwijderBericht.php?code=$row[code]'>Verwijderen</a>";
         echo "</br>";
     }
     $conn = null;

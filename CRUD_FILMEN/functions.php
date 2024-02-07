@@ -1,11 +1,11 @@
 <?php
-// auteur: Wigmans
+// auteur: Betul Can
 // functie: algemene functies tbv hergebruik
  function ConnectDb(){
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "bieren";
+    $dbname = "3dplus";
    
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -39,25 +39,25 @@
     return $result;
  }
 
- // selecteer de rij van de opgeven biercode uit de table bier
- function GetBier($biercode){
+ // selecteer de rij van de opgeven filmid uit de table film
+ function GetFilm($filmid){
     // Connect database
     $conn = ConnectDb();
 
     // Select data uit de opgegeven table methode prepare
     
-    $query = $conn->prepare("SELECT * FROM bier WHERE biercode = :biercode");
-    $query->execute([':biercode'=>$biercode]);
+    $query = $conn->prepare("SELECT * FROM film WHERE filmid = :filmid");
+    $query->execute([':filmid'=>$filmid]);
     $result = $query->fetch();
 
     return $result;
  }
 
 
- function OvzBieren(){
+ function OvzFilmen(){
 
-    // Haal alle bier record uit de tabel 
-    $result = GetData("bier");
+    // Haal alle film record uit de tabel 
+    $result = GetData("film");
     
     //print table
     PrintTable($result);
@@ -96,26 +96,26 @@ function PrintTable($result){
 }
 
 
-function CrudBieren(){
+function CrudFilmen(){
 
     // Menu-item   insert
     $txt = "
-    <h1>Crud BIER</h1>
+    <h1>Crud FILM</h1>
     <nav>
-		<a href='insert_bier.php'>Toevoegen nieuw biertje</a>
+		<a href='insert_film.php'>Toevoegen nieuw filmtje</a>
     </nav>";
     echo $txt;
 
-    // Haal alle bier record uit de tabel 
-    $result = GetData("bier");
+    // Haal alle film record uit de tabel 
+    $result = GetData("film");
 
     //print table
-    PrintCrudBier($result);
+    PrintCrudFilm($result);
     
  }
- // Function 'PrintCrudBier' print een HTML-table met data uit $result 
+ // Function 'PrintCrudFilm' print een HTML-table met data uit $result 
  // en een wzg- en -verwijder-knop.
-function PrintCrudBier($result){
+function PrintCrudFilm($result){
     // Zet de hele table in een variable en print hem 1 keer 
     $table = "<table border = 1px>";
 
@@ -141,12 +141,12 @@ function PrintCrudBier($result){
         
         // Wijzig knopje
         $table .= "<td>". 
-            "<form method='post' action='update_bier.php?biercode=$row[biercode]' >       
+            "<form method='post' action='update_film.php?filmid=$row[filmid]' >       
                     <button name='wzg'>Wzg</button>	 
             </form>" . "</td>";
 
         // Delete via linkje href
-        $table .= '<td><a href="delete_bier.php?biercode='.$row["biercode"].'">verwijder</a></td>';
+        $table .= '<td><a href="delete_film.php?filmid='.$row["filmid"].'">verwijder</a></td>';
         
         $table .= "</tr>";
     }
@@ -156,21 +156,22 @@ function PrintCrudBier($result){
 }
 
 
-function UpdateBier($row){
+function UpdateFilm($row){
        
     try{
         // Connect database
         $conn = ConnectDb();
         
         // Update data uit de opgegeven table methode prepare
-        $sql = "UPDATE bier
+        $sql = "UPDATE film
         SET 
-            naam = '$row[naam]', 
-            soort = '$row[soort]', 
-            stijl = '$row[stijl]', 
-            alcohol = '$row[alcohol]', 
-            brouwcode = '$row[brouwcode]' 
-        WHERE biercode = $row[biercode]";
+            filmnaam = '$row[filmnaam]', 
+            genreid = '$row[genreid]', 
+            releasejaar = '$row[releasejaar]', 
+            regisseur = '$row[regisseur]', 
+            landherkomst = '$row[landherkomst]', 
+            landherkomst = '$row[landherkomst]'
+        WHERE filmid = $row[filmid]";
         
         $query = $conn->prepare($sql);
         $query->execute();
@@ -182,23 +183,24 @@ function UpdateBier($row){
     }
 }
 
-function InsertBier($post){
+function InsertFilm($post){
     try {
         $conn = ConnectDb();
 
         
         $query = $conn->prepare("
-        INSERT INTO bier (naam, soort, stijl, alcohol, brouwcode) 
-        VALUES (:naam, :soort, :stijl, :alcohol, :brouwcode)");
+        INSERT INTO film (filmnaam, genreid, releasejaar, regisseur, landherkomst, duur) 
+        VALUES (:filmnaam, :genreid, :releasejaar, :regisseur, :landherkomst, :duur,)");
 
         //Oplossing 2
         $query->execute(
             [
-                ':naam'=>$post['naam'],
-                ':soort'=>$post['soort'],
-                ':stijl'=>$post['stijl'],
-                ':alcohol'=>$post['alcohol'],
-                ':brouwcode'=>$post['brouwcode']
+                ':filmnaam'=>$post['filmnaam'],
+                ':genreid'=>$post['genreid'],
+                ':releasejaar'=>$post['releasejaar'],
+                ':regisseur'=>$post['regisseur'],
+                ':landherkomst'=>$post['landherkomst'],
+                ':duur'=>$post['duur']
 
             ]
         );
@@ -210,15 +212,15 @@ function InsertBier($post){
     }
 }
 
-function DeleteBier($biercode){
+function DeleteFilm($filmid){
     echo "Delete row<br>";
     try{
         // Connect database
         $conn = ConnectDb();
         
         // Update data uit de opgegeven table methode prepare
-        $sql = "DELETE FROM bier
-                WHERE biercode = '$biercode'";
+        $sql = "DELETE FROM film
+                WHERE filmid = '$filmid'";
                 
         $query = $conn->prepare($sql);
         $result = $query->execute();
@@ -236,7 +238,7 @@ function dropDown2($label, $data, $row_selected=-1){
             <select name='$label' id='$label'>";
 
     foreach($data as $row){
-        $text .= "<option value='$row[brouwcode]'>$row[naam]</option>\n";
+        $text .= "<option value='$row[filmid]'>$row[filmnaam]</option>\n";
     }
 
     $text .= "</select>";
@@ -246,16 +248,16 @@ function dropDown2($label, $data, $row_selected=-1){
 }
 
 function dropDownBrouwer($label, $row_selected){
-    $data = GetData('brouwer');
+    $data = GetData('film');
     $txt = "
     <label for='$label'>Choose a $label:</label>
         <select name='$label' id='$label'>";
 
     foreach($data as $row){
-        if ($row['brouwcode'] == $row_selected){
-            $txt .= "<option value='$row[brouwcode]' selected='selected'>$row[naam]</option>\n";
+        if ($row['filmid'] == $row_selected){
+            $txt .= "<option value='$row[filmid]' selected='selected'>$row[filmnaam]</option>\n";
         } else {
-            $txt .= "<option value='$row[brouwcode]'>$row[naam]</option>\n";
+            $txt .= "<option value='$row[filmid]'>$row[filmnaam]</option>\n";
         }
         
     }

@@ -3,12 +3,12 @@
 
 try {
     $db = new PDO("mysql:host=localhost;dbname=fietsenmaker", "root", "");
-    $query = $db->prepare("SELECT * FROM fietsen WHERE id = " . $_GET['id']);
+    $query = $db->prepare("SELECT * FROM fietsen WHERE code = " . $_GET['code']);
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     echo "<table>";
     foreach ($result as $data) {
-        echo "Artikelnummer: " . $data['id'] . "<br>";
+        echo "Artikelnummer: " . $data['code'] . "<br>";
         echo "Merk: " . $data['merk'] . "<br>";
         echo "Prijs: &euro;" . number_format($data['prijs'],2,',','.')  . "<br><br>";
     }

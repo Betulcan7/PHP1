@@ -15,7 +15,7 @@ try {
   
     echo '<a href="toevoegen.php">Toevoegen nieuwe regisseur</a>'; 
 
-    echo '<table border="1" width="290">';
+    echo '<table border="1" wcodeth="290">';
     
     foreach ($result as $data) {
         echo "<tr>";

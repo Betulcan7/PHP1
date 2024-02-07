@@ -1,7 +1,6 @@
 <?php
-
 // functie: Programma CRUD bieren
-// auteur: Wigmans  
+// auteur: Wigmans   
 
 // Initialisatie
 include 'functions.php';
@@ -10,5 +9,6 @@ include 'functions.php';
 
 // Print bieren opdracht 12
 CrudBieren();
+
 
 ?>

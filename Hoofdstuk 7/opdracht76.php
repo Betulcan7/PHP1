@@ -21,18 +21,18 @@
         $aantal = sizeof($_SESSION["cijfer"]);
         echo "Aantal ingevoerde cijfers: $aantal";
 
-        $gemiddelde = 0;
+        $gemcodedelde = 0;
 
         if($aantal > 0) {
             for($i=0;$i<$aantal;$i++) {
-                $gemiddelde+= $_SESSION["cijfer"] [$i];
+                $gemcodedelde+= $_SESSION["cijfer"] [$i];
 
             }
-            $gemiddelde = $gemiddelde / $aantal;
+            $gemcodedelde = $gemcodedelde / $aantal;
 
         }
-        echo "</br>Gemiddelde: ";
-        echo round ($gemiddelde,1);
+        echo "</br>Gemcodedelde: ";
+        echo round ($gemcodedelde,1);
 
         ?>
 

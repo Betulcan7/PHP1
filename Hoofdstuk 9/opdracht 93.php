@@ -11,7 +11,7 @@ try {
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
-    echo '<table border="1" width="200">';
+    echo '<table border="1" wcodeth="200">';
     foreach ($result as $data) {
         
         echo "<tr><td>";

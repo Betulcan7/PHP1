@@ -8,7 +8,7 @@ switch($day) {
         echo "Het is ochtend"; break;
 
     case $day > 12 && $day < 18 :
-        echo "Het is middag"; break;
+        echo "Het is mcodedag"; break;
 
     case $day > 18 && $day < 24 :
         echo "Het is avond"; break;

@@ -12,7 +12,7 @@ if ($uur > 6 & $uur <12)
 
 elseif($uur > 11 & $uur <18)
 {
-    echo "Het is middag ";
+    echo "Het is mcodedag ";
 }
 
 
