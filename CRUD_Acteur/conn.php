@@ -1,5 +1,4 @@
 <?php
-// Auteur: R. Wigmans
 // Function: connectie database
 
 function dbConnect(){
