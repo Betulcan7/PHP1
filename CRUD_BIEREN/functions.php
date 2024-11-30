@@ -1,5 +1,4 @@
 <?php
-// auteur: Wigmans
 // functie: algemene functies tbv hergebruik
  function ConnectDb(){
     $servername = "localhost";
